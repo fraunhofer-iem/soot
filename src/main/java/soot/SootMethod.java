@@ -400,6 +400,11 @@ public class SootMethod extends AbstractHost implements ClassMember, Numberable,
 
       // Method sources are not expected to be thread safe
       activeBody = ms.getBody(this, "jb");
+      if (ms.toString().equals("true")) {
+        Thread t = Thread.currentThread();
+        String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+        System.err.println("RETRIEVE active body (ms done): " + declaringClass.getName() + "." + getName() + msg);
+      }
       setActiveBody(activeBody);
 
       // If configured, we drop the method source to save memory

@@ -210,6 +210,10 @@ public class SootResolver {
    * enclosing types.
    */
   protected void bringToHierarchy(SootClass sc) {
+    if (sc.getName().equals(SootClass.INVOKEDYNAMIC_DUMMY_CLASS_NAME)) {
+        System.err.println("HIERARCHY");
+    }
+
     if (sc.resolvingLevel() >= SootClass.HIERARCHY) {
       return;
     }
@@ -286,6 +290,9 @@ public class SootResolver {
    * these signatures.
    */
   protected void bringToSignatures(SootClass sc) {
+    if (sc.getName().equals(SootClass.INVOKEDYNAMIC_DUMMY_CLASS_NAME)) {
+        System.err.println("SIGNATURE");
+    }
     if (sc.resolvingLevel() >= SootClass.SIGNATURES) {
       return;
     }
@@ -326,6 +333,9 @@ public class SootResolver {
    * conservative and brings all of them to signatures. But this could/should be improved.
    */
   protected void bringToBodies(SootClass sc) {
+    if (sc.getName().equals(SootClass.INVOKEDYNAMIC_DUMMY_CLASS_NAME)) {
+        System.err.println("BODY");
+    }
     if (sc.resolvingLevel() >= SootClass.BODIES) {
       return;
     }

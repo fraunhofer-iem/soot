@@ -3,15 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.soot-oss</groupId>
-    <artifactId>soot</artifactId>
+    <groupId>ca.mcgill.sable</groupId>
+    <artifactId>soot-umbrella</artifactId>
     <name>Soot - a J*va Optimization Framework</name>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>4.1.2</version>
     <description>A Java Optimization Framework</description>
-    <url>https://soot-oss.github.io/soot</url>
+    <url>https://sable.github.io/soot/</url>
     <organization>
-        <name>Soot OSS</name>
-        <url>https://soot-oss.org/</url>
+        <name>Sable</name>
+        <url>http://www.sable.mcgill.ca/</url>
     </organization>
     <licenses>
         <license>
@@ -70,7 +70,7 @@
         <checkstyle.version>8.18</checkstyle.version>
         <checkstyle.dir.path>${basedir}/codingstyle</checkstyle.dir.path>
         <checkstyle.file.path>${checkstyle.dir.path}/soot_checkstyle_checks.xml</checkstyle.file.path>
-        <checkstyle.failOnViolation>true</checkstyle.failOnViolation>
+        <checkstyle.failOnViolation>false</checkstyle.failOnViolation>
         <licence-check.failOnMissingHeader>true</licence-check.failOnMissingHeader>
         <testcase.groups.excluded>categories.Java9Test,categories.Java11Test</testcase.groups.excluded>
         <asm.version>8.0.1</asm.version>

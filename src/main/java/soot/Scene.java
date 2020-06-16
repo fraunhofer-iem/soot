@@ -891,7 +891,10 @@ public class Scene {
       }
 
       if (containsClass(c.getName())) {
-        throw new RuntimeException("duplicate class: " + c.getName());
+        Thread t = Thread.currentThread();
+        String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+        System.err.println("duplicate class: " + msg);
+        throw new RuntimeException("duplicate class: " + c.getName() + msg);
       }
 
       classes.add(c);
@@ -1225,7 +1228,11 @@ public class Scene {
 
     if ((allowsPhantomRefs() && phantomNonExist)
         || className.equals(SootClass.INVOKEDYNAMIC_DUMMY_CLASS_NAME)) {
+      Thread t = Thread.currentThread();
+      String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+      System.err.println("RefType before getOrAddRefType: " + className + msg);
       type = getOrAddRefType(className);
+      System.err.println("RefType: " + type.toString() + ", " + type.hashCode() + msg);
       synchronized (type) {
         SootClass c = new SootClass(className);
         c.isPhantom = true;

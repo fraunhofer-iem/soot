@@ -1464,6 +1464,10 @@ final class AsmMethodSource implements MethodSource {
 
       // create ref to actual method
       SootClass bclass = Scene.v().getSootClass(SootClass.INVOKEDYNAMIC_DUMMY_CLASS_NAME);
+      Thread t = Thread.currentThread();
+      String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+      System.err.println("DRIN: convertInvokeDynamicInsn: " + insn.hashCode() + msg);
+      found = "true";
 
       // Generate parameters & returnType & parameterTypes
       Type[] types = Util.v().jimpleTypesOfFieldOrMethodDescriptor(insn.desc);
@@ -2135,6 +2139,12 @@ final class AsmMethodSource implements MethodSource {
       }
     }
     return null;
+  }
+
+  String found = "false";
+
+  public String toString() {
+    return found;
   }
 
   @Override

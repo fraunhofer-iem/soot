@@ -651,6 +651,9 @@ public class PackManager {
   }
 
   private void runBodyPacks(final Iterator<SootClass> classes) {
+    Thread t = Thread.currentThread();
+    String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+    System.err.println("RUNBODY packs: " + msg);
     int threadNum = Runtime.getRuntime().availableProcessors();
     CountingThreadPoolExecutor executor
         = new CountingThreadPoolExecutor(threadNum, threadNum, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
@@ -685,6 +688,7 @@ public class PackManager {
   }
 
   protected void writeOutput(Iterator<SootClass> classes) {
+    System.err.println("WRITE OUTPUT");
     // If we're writing individual class files, we can write them
     // concurrently. Otherwise, we need to synchronize for not destroying
     // the shared output stream.
@@ -1257,6 +1261,9 @@ public class PackManager {
   }
 
   private void retrieveAllBodies() {
+    Thread t = Thread.currentThread();
+    String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+    System.err.println("RETRIEVE all bodies" + msg);
     // The old coffi front-end is not thread-safe
     int threadNum = Options.v().coffi() ? 1 : Runtime.getRuntime().availableProcessors();
     CountingThreadPoolExecutor executor

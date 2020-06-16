@@ -260,6 +260,11 @@ public class SootMethodRefImpl implements SootMethodRef {
   }
 
   private SootMethod resolve(final StringBuilder trace) {
+    if (declaringClass.getName().equals(SootClass.INVOKEDYNAMIC_DUMMY_CLASS_NAME)) {
+        Thread t = Thread.currentThread();
+        String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+        System.err.println("RESOLVE SootMethod: " + getName() + msg);
+    }
     SootMethod resolved = tryResolve(trace);
     if (resolved != null) {
       return resolved;

@@ -108,6 +108,17 @@ public class SootClass extends AbstractHost implements Numberable {
     if (Options.v().debug_resolver()) {
       logger.debug("created " + name + " with modifiers " + modifiers);
     }
+    if (INVOKEDYNAMIC_DUMMY_CLASS_NAME.equals(name)) {
+        Thread t = Thread.currentThread();
+        String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+        System.err.println("CREATED soot.dummy.InvokeDynamic... " + hashCode() + msg);
+        /*try {
+          Thread.sleep(2000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        System.err.println("AFTER SLEEP" + msg);*/
+    }
     setResolvingLevel(BODIES);
   }
 
@@ -191,6 +202,9 @@ public class SootClass extends AbstractHost implements Numberable {
   public void checkLevelIgnoreResolving(int level) {
     int currentLevel = resolvingLevel();
     if (currentLevel < level) {
+      Thread t = Thread.currentThread();
+      String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+      System.err.println("LEVEL ERROR: " + getName() + ", " + hashCode() + msg);
       String hint = "\nIf you are extending Soot, try to add the following call before calling soot.Main.main(..):\n"
           + "Scene.v().addBasicClass(" + getName() + "," + levelToString(level) + ");\n"
           + "Otherwise, try whole-program mode (-w).";
@@ -204,6 +218,11 @@ public class SootClass extends AbstractHost implements Numberable {
   }
 
   public void setResolvingLevel(int newLevel) {
+    if (INVOKEDYNAMIC_DUMMY_CLASS_NAME.equals(getName())) {
+        Thread t = Thread.currentThread();
+        String msg = " [" + t.getId() + ", " + t.getName() + ", " + t.hashCode() + "]";
+        System.err.println("SETRESOLVINGLEVEL: soot.dummy.InvokeDynamic: " + newLevel + msg);
+    }
     resolvingLevel = newLevel;
   }
 
